@@ -1,7 +1,2 @@
-require "includable/activerecord/version"
-
-module Includable
-  module Activerecord
-    # Your code goes here...
-  end
-end
+require_relative 'activerecord/version'
+require_relative 'activerecord/model'
