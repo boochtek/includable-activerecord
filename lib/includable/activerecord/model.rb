@@ -10,11 +10,11 @@ require_relative 'ext/module'
 #   class User < ActiveRecord::Base
 #   end
 module ActiveRecord::Model
-  EXTENDED_MODULES = (ActiveRecord::Base.extended_modules - Object.extended_modules).reverse
-  INCLUDED_MODULES = (ActiveRecord::Base.included_modules - Object.included_modules).reverse
+  EXTENDED_MODULES = (ActiveRecord::Base.extended_modules - Object.extended_modules)
+  INCLUDED_MODULES = (ActiveRecord::Base.included_modules - Object.included_modules)
 
   def self.included(base)
-    EXTENDED_MODULES.each{|mod| base.__send__(:extend, mod)}
-    INCLUDED_MODULES.each{|mod| base.__send__(:include, mod)}
+    base.extend *EXTENDED_MODULES
+    base.__send__(:include, *INCLUDED_MODULES)
   end
 end
